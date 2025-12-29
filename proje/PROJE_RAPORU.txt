@@ -1,0 +1,53 @@
+|| Akıllı Alışveriş Listesi ve Bütçe Takip Sistemi ||
+
+> Geliştirici : Ecrin KAYA (030125020)
+> Dil : C Programlama Dili
+
+=====================================================
+
+| Proje Hakkında |
+
+> Bu proje, kullanıcıların market alışverişlerini planlamalarını, bütçelerini yönetmelerini ve harcamalarını kontrol altına almalarını sağlayan bir terminal uygulamasıdır.
+> Sıradan bir liste uygulamasından farklı olarak; bütçe takibi yapar, harcamaları anlık hesaplar ve program kapatılıp açıldığında hem ürün listenizi hem de bütçenizi hatırlar.
+
+| Projenin Özellikleri |
+
+1. Veri Kalıcılığı
+> Akıllı Kayıt: Program kapatıldığında ürün listesi, ürünlerin durumları (alındı/alınmadı) ve bütçeniz "alisveris.txt" dosyasına kaydedilir.
+> Otomatik Yükleme: Programı tekrar açtığınızda bütçeyi tekrar girmeniz gerekmez; kaldığınız yerden devam edersiniz.
+
+2. Akıllı Metin Girişi
+> C dilindeki klasik scanf problemlerini çözen özel bir algoritma içerir.
+> Kullanıcı ürün isminde boşluk kullansa bile (Örn: "Elma Sirkesi"), sistem bunu algılar ve bütünlüğü korumak için arka planda "Elma_Sirkesi" formatına dönüştürür.
+
+3. Dinamik Bütçe Yönetimi
+> Toplam liste tutarını, sepete eklenen (alınan) ürünlerin tutarını ve kalan bütçeyi anlık olarak hesaplar.
+> Bütçe aşımı durumunda kullanıcıyı yazılı olarak uyarır.
+
+| Projenin Teknik Özellikleri |
+
+> Kullanılan Kütüphaneler: Proje sadece standart giriş/çıkış kütüphanesi olan <stdio.h> kullanılarak geliştirilmiştir.
+> Veri Yapısı: Veriler, Paralel Diziler (Parallel Arrays) ile yönetilmektedir. Ürün adları, fiyatları, miktarları ve durumları farklı dizilerde tutulur ancak aynı indeks numarası üzerinden senkronize edilir.
+> Tampon Bellek (Buffer) Yönetimi: Terminal girişlerinde karşılaşılan scanf atlama sorununu çözmek için özel bir bufferTemizle() fonksiyonu geliştirilmiştir. Bu fonksiyon, standart giriş akışında (stdin) kalan artık karakterleri temizleyerek veri bütünlüğünü sağlar ve olası sonsuz döngü hatalarını engeller.
+> Metin İşleme ve Karakter Yönetimi: Metin kopyalama, karakter değiştirme ve kaydırma işlemleri için, <string.h> kütüphanesi kullanılmadan, pointer aritmetiği kullanan özel döngüler yazılmıştır. Örneğin; "Akıllı Metin Girişi" özelliği, karakter dizisi üzerinde tarayarak boşlukları tespit eder ve dönüştürür.
+> Dosya Sistemi: Veriler, bir metin dosyasında (.txt) saklanır. Veriler, fprintf fonksiyonu aracılığıyla dosyaya belirli bir format düzeninde işlenir. Program tekrar açıldığında ise bu veriler, fscanf fonksiyonu ile okunup format kontrolünden geçirildikten sonra belleğe aktarılır.
+> Pointer Kullanımı (Pass-by-Reference): Fonksiyonlar arası veri aktarımı, değişkenlerin kopyası yerine bellek adresleri (pointer) üzerinden yapılır. Bu yöntem, büyük dizilerin kopyalanmasını engelleyerek bellek kullanımını optimize eder ve verilerin doğrudan kaynağında değiştirilmesini sağlar.
+
+| Dosya Yapısı ve Formatı |
+
+> Program verileri "alisveris.txt" dosyasında saklanır. Dosya yapısı şu şekildedir:
+  1. Satır: Toplam Bütçe
+  2. Satır: Toplam Ürün Sayısı
+  3+ Satır: Ürün Detayları (İsim Fiyat Miktar Birim Durum)
+
+> Örnek 'alisveris.txt' İçeriği:
+  1250.00
+  8
+  Salkim_Domates 84.90 2.50 kg 1
+  Tam_Yagli_Sut 44.50 2.00 L 1
+  Cikolata 13.25 5.00 adet 0
+  Kelebek_Makarna 22.50 3.00 paket 1
+  Un 25.00 5.00 kg 1
+  Biber_Salcasi 105.00 1.65 kg 0
+  Dana_Kiyma 800.00 0.75 kg 1
+  Sucuk 1760.00 0.25 kg 0

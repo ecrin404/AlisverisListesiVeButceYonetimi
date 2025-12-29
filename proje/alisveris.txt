@@ -1,0 +1,10 @@
+1250.00
+8
+Salkim_Domates 84.90 2.50 kg 1
+Tam_Yagli_Sut 44.50 2.00 L 1
+Cikolata 13.25 5.00 adet 0
+Kelebek_Makarna 22.50 3.00 paket 1
+Un 25.00 5.00 kg 1
+Biber_Salcasi 105.00 1.65 kg 0
+Dana_Kiyma 800.00 0.75 kg 1
+Sucuk 1760.00 0.25 kg 0
